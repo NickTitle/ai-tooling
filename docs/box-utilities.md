@@ -2,7 +2,7 @@
 
 Last updated: 2026-05-30
 
-Imported from secret gist:
+Imported from gist:
 
 ```text
 https://gist.github.com/OWNER/GIST_ID

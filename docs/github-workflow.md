@@ -8,22 +8,28 @@ Check auth:
 gh auth status
 ```
 
-This machine has the scopes needed for private repositories and gists.
+This machine has the scopes needed for repositories and gists.
 
-## Private By Default
+## Publishing
 
-Machine notes should stay private unless they are scrubbed first. This repo
-contains Tailscale hostnames, private IPs, local paths, ports, and service names.
+This repo is public. Do not commit credentials, auth tokens, private keys,
+personal data, or anything that should not be indexed or copied elsewhere.
 
-Create a private repo:
+Create a public repo:
 
 ```bash
-gh repo create NickTitle/ai-tooling --private --source=. --remote=origin --push
+gh repo create NickTitle/ai-tooling --public --source=. --remote=origin --push
+```
+
+Change an existing repo to public:
+
+```bash
+gh repo edit NickTitle/ai-tooling --visibility public
 ```
 
 ## Gists
 
-The imported box utilities note started as a secret gist:
+The imported box utilities note started as a gist:
 
 ```text
 https://gist.github.com/OWNER/GIST_ID

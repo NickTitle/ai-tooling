@@ -1,7 +1,7 @@
 # ai-tooling
 
-Private Markdown notes for the AI-assisted tooling and local hosting conventions
-on `claudebox`.
+Markdown notes for the AI-assisted tooling and local hosting conventions on
+`claudebox`.
 
 Last updated: 2026-05-30
 
@@ -14,7 +14,7 @@ Last updated: 2026-05-30
 | [Apphost Registry](docs/apphost-registry.md) | Registry runtime model, API use, static app registration, and external service rows. |
 | [WebShell And Tailscale](docs/webshell-tailscale.md) | Browser terminal architecture, Tailscale access, bind-address conventions, and checks. |
 | [Codex Local Workflow](docs/codex-local-workflow.md) | How Codex should work on this box: edits, verification, services, and safety rules. |
-| [GitHub Workflow](docs/github-workflow.md) | `gh`, gists, private repos, and the import source for this repo. |
+| [GitHub Workflow](docs/github-workflow.md) | `gh`, gists, repo publishing, and the import source for this repo. |
 
 ## Source Gist
 
@@ -28,7 +28,8 @@ The imported copy lives at [docs/box-utilities.md](docs/box-utilities.md).
 
 ## Core Rules
 
-- Keep machine-specific notes private unless they are scrubbed first.
+- Do not commit credentials, auth tokens, private keys, or personal data.
+- Treat machine-specific topology as public once it lands in this repo.
 - Use systemd for anything that should remain running after the agent turn.
 - Use the apphost registry as the inventory/front door for discoverable local web apps.
 - Use Tailscale addresses for private access from your own devices.
@@ -45,4 +46,5 @@ git commit -m "Update ai tooling notes"
 git push
 ```
 
-For sensitive content, keep this repository private.
+Keep sensitive operational details in a private location unless they are safe to
+publish.
