@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>{{LAUNCHD_LABEL}}</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>{{LAUNCHD_WRAPPER_PATH}}</string>
+  </array>
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>BUZZ_AGENT_ENV_FILE</key>
+    <string>{{CONFIG_FILE_PATH}}</string>
+    <key>BUZZ_AGENT_SECRET_FILE</key>
+    <string>{{SECRETS_FILE_PATH}}</string>
+  </dict>
+  <key>RunAtLoad</key>
+  <true/>
+  <key>KeepAlive</key>
+  <true/>
+  <key>StandardOutPath</key>
+  <string>{{STANDARD_OUT_PATH}}</string>
+  <key>StandardErrorPath</key>
+  <string>{{STANDARD_ERROR_PATH}}</string>
+</dict>
+</plist>
