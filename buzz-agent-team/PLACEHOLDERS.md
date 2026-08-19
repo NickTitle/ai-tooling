@@ -33,7 +33,8 @@ private deployment copy.
 - `{{TLS_CA_FILE}}`, `{{LOG_PATH}}`
 - `{{AGENT_UNIT}}`, `{{AGENT_TEMPLATE_UNIT}}`, `{{RELAY_UNIT}}`,
   `{{PAIRING_RELAY_UNIT}}`, `{{MAINTENANCE_UNIT_TEMPLATE}}`
-- `{{MAINTENANCE_HELPER}}`, `{{MAINTENANCE_SKILL}}`
+- `{{MAINTENANCE_HELPER}}`, `{{MAINTENANCE_SKILL}}`,
+  `{{MAINTENANCE_HANDOFF_PATH}}`
 
 ## Network and deployment
 

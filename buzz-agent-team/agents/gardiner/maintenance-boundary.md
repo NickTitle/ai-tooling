@@ -16,10 +16,22 @@ allowlist for:
 - a host-context sandbox check; and
 - reboot only when the operating system's reboot marker exists.
 
+One practical contract names these operations `security-upgrade`,
+`system-upgrade`, `adapter-upgrade`, `buzz-upgrade`, `status`,
+`restart-agents`, `restart-buzz`, `sandbox-check`, and `reboot`. The names are
+portable; their commands, service targets, and privilege policy are not.
+
 Long-running maintenance should run in detached, locked supervisor units so an
 agent restart cannot duplicate or abandon it. Gardiner must inspect existing
 state before starting a new operation and verify package integrity, services,
 versions, relay access, sandbox health, and reboot state afterward.
+
+Any operation that may restart Gardiner, Buzz, or the host requires a durable
+mode-`0600` handoff at `{{MAINTENANCE_HANDOFF_PATH}}` before the restart. It
+must record the operation, channel UUID, thread root event ID, expected checks,
+and start time. Startup and heartbeat handling must resume the recorded work,
+verify it, report exactly once in the recorded thread, and remove the handoff
+only after the report succeeds.
 
 ## Not portable or pre-authorized
 

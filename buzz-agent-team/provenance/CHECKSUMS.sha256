@@ -1,6 +1,6 @@
 bfd2706130670c9c16b7915acfd9cf85b72cd79076aeb1a85ef72cd2840c6062  ./AGENTS.md
 108cb15997e51b75a8d18b0c1e2c52bd3879d051ab02118973387df1e4aab584  ./LICENSES/Apache-2.0.txt
-de4896cb8e3bb5f24e6b22c550657c7adf3b5a3cf9697dd2fe4cbfd834bb8125  ./PLACEHOLDERS.md
+603f28e980cf207733b376024e7bf94f9718bbca77f19a3c31f98261c4a05d31  ./PLACEHOLDERS.md
 ae4a2958b7223c6fdda16e64e9b057f2d7df0e6ec455c57f7c0c1fdb57b0c63c  ./README.md
 916b28bafe16d6846e741763325798d2b06523476e1a8a2093698f619c52ee2c  ./REDACTION.md
 b1af7306b937682fb46f54a70bae864fdd5a03bcbe61e1b491f92add36a55e4a  ./TOOLS.md
@@ -9,12 +9,12 @@ b1af7306b937682fb46f54a70bae864fdd5a03bcbe61e1b491f92add36a55e4a  ./TOOLS.md
 db1a2ed712f3cb38da6909ccf3a22ff47bd8871998de917f05267ee6e514044e  ./agents/cinco/heartbeat.template.md
 18d229b89577594dfeb9b528d82f46ca4db69bd4a910309c7097088b6af5591d  ./agents/cinco/system.template.md
 efac0586ac30fd49a67c869b1c2c2937a6c367454a69789c574b3d95a97d807d  ./agents/gardiner/heartbeat.template.md
-a15c00cca5349f0f5ff6f09aa03c323b0154d3608ff8678c8114c4bc2dfe4b0c  ./agents/gardiner/maintenance-boundary.md
-c175ba8b549f11eb1bc2e8282c34113a8669c9321cee2e1ac8eb94b261873deb  ./agents/gardiner/system.template.md
+9e2d9f7ed31fe63477cc2768cbf82552f533864690408349a04be97b4c39c201  ./agents/gardiner/maintenance-boundary.md
+57afb0fedbd70b2dfdf695fad404fa2573789b97052557681da467cb08a44702  ./agents/gardiner/system.template.md
 c9089238c4a920c4e39f42061736406c1aab96e871ee827bf9b3115aba1e0b7c  ./agents/hibar/heartbeat.template.md
 154e99a50e9aa0e991ba166047d25b3d0301d054200cbd2985ecda5eb6ab2749  ./agents/hibar/system.template.md
 d855629c11eb89c23070ba28a201dd8dcb6bcf8260110a2cda65d9a044ce92b9  ./agents/honey/system.template.md
-43a39e4e415401c02d755e73ce0f80dfad00ca5a5ba4497873764a3be0e700c7  ./provenance/SOURCES.md
+cf94de410df857a626336557cdfac1df78225252f316d793bb9002cbb8e07b56  ./provenance/SOURCES.md
 145cf07d6ec3c961d0f04708450ca595612ac7fbc675d89df1d5f548ccf5d5fa  ./provenance/VERSIONS.md
 a45740ce220dfa20c30276775ca1b90b59416315a9261710594ef9dc96f8473f  ./scripts/check-public-safe.sh
 c1a457d3327cfc676681598961df26b26ae644ec8f240b6e2fa672696e370bf8  ./setup/linux/agent.env.example
