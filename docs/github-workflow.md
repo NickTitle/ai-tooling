@@ -1,60 +1,57 @@
-# GitHub Workflow
+# GitHub workflow
 
-The GitHub CLI is installed and authenticated as `NickTitle`.
+Reviewed 2026-09-07. Publish tooling-only content to
+[NickTitle/ai-tooling](https://github.com/NickTitle/ai-tooling). Authenticate as
+NickTitle; shiptoast is an organization, not a second login.
 
-Check auth:
+## Inspect and review
 
 ```bash
 gh auth status
+gh api user --jq .login
+git status --short --branch
+git worktree list
+git remote -v
+git fetch origin
+gh pr list --repo NickTitle/ai-tooling --state open
 ```
 
-This machine has the scopes needed for repositories and gists.
+Read `manage-nick-github`. Confirm the target and preserve other branches and
+worktrees. Owner publication direction supplies authorization; independent
+review still checks the exact commit and content.
 
-## Publishing
+Review every included file for credentials and actual-project names, paths,
+links, data, or inventories. Use neutral examples. The portable Buzz export
+has stricter placeholder, license, and provenance/checksum rules.
 
-This repo is public. Do not commit credentials, auth tokens, private keys,
-personal data, or anything that should not be indexed or copied elsewhere.
+## Publish
 
-Create a public repo:
+After editing and validating on a branch:
 
 ```bash
-gh repo create NickTitle/ai-tooling --public --source=. --remote=origin --push
-```
-
-Change an existing repo to public:
-
-```bash
-gh repo edit NickTitle/ai-tooling --visibility public
-```
-
-## Gists
-
-The imported box utilities note started as a gist:
-
-```text
-https://gist.github.com/OWNER/GIST_ID
-```
-
-Useful commands:
-
-```bash
-gh gist list --limit 10
-gh gist view GIST_ID --files
-gh gist view GIST_ID --raw
-```
-
-This `gh` install creates secret gists by default. Use `--public` only for notes
-that are safe to list publicly.
-
-## Repo Maintenance
-
-```bash
-git status --short
-git diff
+git diff --check
 git add README.md docs
-git commit -m "Update ai tooling notes"
-git push
+git commit -m "Update tooling documentation"
+git rev-parse HEAD
+# Review this exact commit before pushing.
+git push -u origin HEAD
 ```
 
-Use short commit messages that describe the documentation change. Keep generated
-or local-only files out of this Markdown repo unless they are part of the notes.
+Create or update a draft PR. Pass a prepared text file with real newlines:
+
+```bash
+gh pr create --repo NickTitle/ai-tooling --base main --draft \
+  --title "Update tooling documentation" --body-file /tmp/tooling-pr.md
+```
+
+Verify the remote branch SHA matches the reviewed commit. Report the PR link,
+SHA, checks, and review state. A pushed branch is not a merge.
+
+## Disclosure cleanup
+
+If content was already published, audit affected branches, history, and PR
+bodies/comments. Coordinate replacement ancestry before moving refs. Use
+explicit force-with-lease only for owner-authorized affected refs; preserve
+unrelated work. Recheck remote contents afterward. Force-push does not guarantee
+removal from GitHub caches, PR history, forks, or clones. Revoke exposed real
+credentials even if their text is removed.

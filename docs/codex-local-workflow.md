@@ -1,101 +1,57 @@
-# Codex Local Workflow
+# Codex workflow
 
-This box has machine-level agent instructions at:
+Reviewed 2026-09-07. Read `/home/nick/AGENTS.md`, repo instructions, and the
+applicable skill before changing anything.
 
-```text
-/home/nick/AGENTS.md
-```
+## Configuration and skills
 
-The key idea is simple: short-lived commands are fine for builds, tests, and
-inspection. Anything that should stay available after the current turn belongs
-in systemd.
+Ordinary agents share `/home/nick/.codex/config.toml`; Gardiner has an isolated
+Codex home. Shared model/effort are Astra/medium; Brain selects xhigh. Do not
+publish complete configs. Effective permissions also depend on the launching
+runtime and session policy, not just config keys.
 
-## Working Directory
+| Machine skill | Purpose |
+| --- | --- |
+| `operate-buzz` | Fleet, deployment, and maintenance boundaries |
+| `manage-nick-github` | Account/target selection and reviewed publication |
+| `serve` | systemd, registry, and Temporal |
 
-Use `/home/nick/Development` for projects and local tools unless there is a
-specific reason to work elsewhere.
+System skill directories include imagegen, openai-docs, plugin-creator,
+review-agent, skill-creator, and skill-installer. Disk presence does not guarantee
+session availability. Use the session catalog for plugin skills and versions.
+Use OpenAI Docs for current product guidance; this repo records local tooling.
 
-Before editing an existing project, inspect the repo shape and current changes:
-
-```bash
-pwd
-git status --short
-rg --files | sed -n '1,120p'
-```
-
-Use `rg` first for text search. It is faster and usually clearer than `grep`.
-
-## File Edits
-
-Keep edits scoped to the requested behavior and the local conventions already in
-the repo.
-
-Prefer structured APIs and parsers over ad hoc string manipulation when the
-language or codebase provides them.
-
-Do not revert user changes unless explicitly asked. If unrelated files are dirty,
-leave them alone.
-
-## Persistent Services
-
-When building or exposing something that should keep running:
-
-1. Create a service file with `WorkingDirectory`, `ExecStart`, environment, and
-   `Restart=on-failure`.
-2. Verify it with `systemd-analyze verify`.
-3. Install it into the correct systemd unit directory.
-4. Reload systemd.
-5. Enable and start the unit.
-6. Check logs, status, bind address, and an HTTP or domain health check.
-7. Add an apphost registry row if it should appear in the local app inventory.
-
-System-level units normally live in:
-
-```text
-/etc/systemd/system
-```
-
-User-level units normally live in:
-
-```text
-~/.config/systemd/user
-```
-
-Prefer user-level units unless the service needs system privileges, Docker,
-boot-level behavior, or established apphost registry conventions.
-
-## Verification
-
-Common checks:
+## Editing
 
 ```bash
-systemd-analyze verify <unit-file>
-systemctl status <unit> --no-pager --lines=80
-journalctl -u <unit> -n 100 --no-pager
-systemctl is-active <unit>
-systemctl is-enabled <unit>
-ss -ltnp '( sport = :<port> )'
-curl -fsS http://127.0.0.1:<port>/ || true
-curl -fsS http://100.100.196.79:<port>/ || true
+git status --short --branch
+git worktree list
+git remote -v
+rg --files
 ```
 
-For registry-discoverable apps:
+Reuse the right worktree and keep edits off the default branch. Preserve
+unrelated changes. Read code before editing. Validate docs with link, example,
+whitespace, and publication-content checks; validate code with the relevant
+package’s full suite. Record the exact commit tested.
 
 ```bash
-curl -fsS http://127.0.0.1:9080/api/apps
+git config --local user.name
+git config --local user.email
+git diff --check
 ```
 
-## Git Safety
+Resolve missing commit identity before committing. Follow the
+[GitHub workflow](github-workflow.md) for review and push.
 
-Use non-interactive commands where possible:
+## Execution
 
-```bash
-git status --short
-git diff -- README.md docs
-git add README.md docs
-git commit -m "Update documentation"
-git push
-```
+Owner authorization and runtime execution approval are separate. Reuse existing
+authorization within scope. If execution is rejected, report the exact action
+and reason, preserve work, and do not bypass the control. A quota failure does
+not mean the action itself was unsafe.
 
-Avoid destructive commands such as `git reset --hard` or `git checkout --` unless
-the user clearly asks for them.
+Short-lived commands may run in the active shell. Persistent services belong in
+systemd. General machine guidance prefers user units where suitable; the
+established tooling here uses system units. Preserve its ownership and ports.
+See [hosting](serve-skill.md).

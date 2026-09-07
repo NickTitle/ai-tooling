@@ -1,50 +1,72 @@
-# ai-tooling
+# AI tooling
 
-Markdown notes for the AI-assisted tooling and local hosting conventions on
-`claudebox`.
+Tooling and operating notes for this host. Reviewed 2026-09-07.
 
-Last updated: 2026-05-30
+## Quickstart: use the existing system
 
-## Start Here
+This host runs Buzz, a shared workspace where people ask persistent AI agents
+for help. Agents can work on files and tools, review changes, and report results
+in the conversation. This guide is for an existing, configured system; it is
+not an installation guide.
 
-| Document | Purpose |
+1. Connect your device to the authorized **Tailscale VPN**. Use the Buzz Desktop
+   connection already configured for this host. If you are new, have the owner
+   provide access and pairing details privately; do not paste keys into chat.
+2. Open a Buzz channel and mention @Honey for general help or @Cinco to
+   coordinate work across agents. State the outcome, constraints, and whether
+   you want advice or changes made.
+3. Keep follow-ups in the same thread. Agents post results, blockers, and links
+   there. Open the linked file or pull request to inspect the work; a proposed
+   change is not necessarily deployed or merged. Ask for status in that thread
+   if you need an update.
+
+Fictional request:
+
+> @Honey draft a one-page quick reference for an imaginary tool called Example.
+> Use plain English and save it for review. Do not publish or deploy it.
+
+| Agent | Ask for |
 | --- | --- |
-| [Box Utilities](docs/box-utilities.md) | Imported gist with the machine map, WebShell, Tailscale, apphost registry, Temporal, and debugging commands. |
-| [Serve Skill](docs/serve-skill.md) | Operational notes for the Codex `serve` skill and the systemd/apphost/Temporal policy. |
-| [Apphost Registry](docs/apphost-registry.md) | Registry runtime model, API use, static app registration, and external service rows. |
-| [WebShell And Tailscale](docs/webshell-tailscale.md) | Browser terminal architecture, Tailscale access, bind-address conventions, and checks. |
-| [Codex Local Workflow](docs/codex-local-workflow.md) | How Codex should work on this box: edits, verification, services, and safety rules. |
-| [GitHub Workflow](docs/github-workflow.md) | `gh`, gists, repo publishing, and the import source for this repo. |
+| Honey | General help and hands-on work |
+| Cinco | Coordination and follow-through across agents |
+| Brain | Difficult technical questions and architecture advice |
+| Hibar | Independent review and authorized publication |
+| Gardiner | Scoped host maintenance and recovery |
 
-## Source Gist
+Each channel has its own conversation and task state. Give enough context when
+moving a request to another channel. See [Buzz](docs/buzz-agents.md) for agent
+sessions and messaging.
 
-This repo started from the secret gist:
+For running tools, **systemd** keeps services alive, **apphost** lists hosted
+apps, and **Temporal** handles durable scheduled work. Ask for hosting explicitly
+when you need it; [the hosting guide](docs/serve-skill.md) explains the choices.
+[WebShell](docs/webshell-tailscale.md) provides a browser terminal over the VPN
+when shell access is needed. [Maintenance](docs/maintenance-recovery.md) explains
+Gardiner’s limits and recovery checks. Normal Buzz use does not require a shell
+or restarting services.
 
-```text
-https://gist.github.com/OWNER/GIST_ID
-```
+## Reference guides
 
-The imported copy lives at [docs/box-utilities.md](docs/box-utilities.md).
+| Guide | Covers |
+| --- | --- |
+| [Inventory](docs/machine-inventory.md) | Installed versions, services, and source locations |
+| [Buzz](docs/buzz-agents.md) | Agents, sessions, messages, and dependencies |
+| [Maintenance](docs/maintenance-recovery.md) | Helper authority and recovery |
+| [Codex](docs/codex-local-workflow.md) | Configuration, skills, and editing workflow |
+| [Hosting](docs/serve-skill.md) | systemd and Temporal |
+| [Registry](docs/apphost-registry.md) | Static hosting and external service rows |
+| [WebShell](docs/webshell-tailscale.md) | Terminal persistence and Tailscale access |
+| [GitHub](docs/github-workflow.md) | Review and publication |
+| [Commands](docs/box-utilities.md) | Common read-only checks |
 
-## Core Rules
+This public repo documents tooling only. Exclude credentials, private identities,
+application inventories, actual-project names or data, and raw transcripts.
+Examples use neutral names. Local paths identify tooling sources on this host.
 
-- Do not commit credentials, auth tokens, private keys, or personal data.
-- Treat machine-specific topology as public once it lands in this repo.
-- Use systemd for anything that should remain running after the agent turn.
-- Use the apphost registry as the inventory/front door for discoverable local web apps.
-- Use Tailscale addresses for private access from your own devices.
-- Use local Temporal for delayed, scheduled, retried, or workflow-like app behavior.
-- Prefer `/home/nick/Development` for project checkouts and local tools.
+The [portable Buzz toolkit](https://github.com/NickTitle/ai-tooling/pull/1) is
+separate export work with stricter placeholder and provenance rules. It is not
+a backup of deployed configuration.
 
-## Maintenance
-
-```bash
-git status
-git pull --ff-only
-git add README.md docs
-git commit -m "Update ai tooling notes"
-git push
-```
-
-Keep sensitive operational details in a private location unless they are safe to
-publish.
+Use systemd for persistent services, apphost for discoverable apps, and Temporal
+for durable scheduled work. Record observation dates; installed versions do not
+prove release currency. Change docs through the [reviewed publication workflow](docs/github-workflow.md).
