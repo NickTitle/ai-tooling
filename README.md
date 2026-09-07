@@ -2,6 +2,51 @@
 
 Tooling and operating notes for this host. Reviewed 2026-09-07.
 
+## Quickstart: use the existing system
+
+This host runs Buzz, a shared workspace where people ask persistent AI agents
+for help. Agents can work on files and tools, review changes, and report results
+in the conversation. This guide is for an existing, configured system; it is
+not an installation guide.
+
+1. Connect your device to the authorized **Tailscale VPN**. Use the Buzz Desktop
+   connection already configured for this host. If you are new, have the owner
+   provide access and pairing details privately; do not paste keys into chat.
+2. Open a Buzz channel and mention @Honey for general help or @Cinco to
+   coordinate work across agents. State the outcome, constraints, and whether
+   you want advice or changes made.
+3. Keep follow-ups in the same thread. Agents post results, blockers, and links
+   there. Open the linked file or pull request to inspect the work; a proposed
+   change is not necessarily deployed or merged. Ask for status in that thread
+   if you need an update.
+
+Fictional request:
+
+> @Honey draft a one-page quick reference for an imaginary tool called Example.
+> Use plain English and save it for review. Do not publish or deploy it.
+
+| Agent | Ask for |
+| --- | --- |
+| Honey | General help and hands-on work |
+| Cinco | Coordination and follow-through across agents |
+| Brain | Difficult technical questions and architecture advice |
+| Hibar | Independent review and authorized publication |
+| Gardiner | Scoped host maintenance and recovery |
+
+Each channel has its own conversation and task state. Give enough context when
+moving a request to another channel. See [Buzz](docs/buzz-agents.md) for agent
+sessions and messaging.
+
+For running tools, **systemd** keeps services alive, **apphost** lists hosted
+apps, and **Temporal** handles durable scheduled work. Ask for hosting explicitly
+when you need it; [the hosting guide](docs/serve-skill.md) explains the choices.
+[WebShell](docs/webshell-tailscale.md) provides a browser terminal over the VPN
+when shell access is needed. [Maintenance](docs/maintenance-recovery.md) explains
+Gardiner’s limits and recovery checks. Normal Buzz use does not require a shell
+or restarting services.
+
+## Reference guides
+
 | Guide | Covers |
 | --- | --- |
 | [Inventory](docs/machine-inventory.md) | Installed versions, services, and source locations |
