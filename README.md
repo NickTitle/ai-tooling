@@ -12,9 +12,9 @@ not an installation guide.
 1. Connect your device to the authorized **Tailscale VPN**. Use the Buzz Desktop
    connection already configured for this host. If you are new, have the owner
    provide access and pairing details privately; do not paste keys into chat.
-2. Open a Buzz channel and mention @Honey for general help or @Cinco to
-   coordinate work across agents. State the outcome, constraints, and whether
-   you want advice or changes made.
+2. Open a Buzz channel and mention @Cinco. Nick tasks Cinco directly; Cinco
+   scopes the request and delegates to the appropriate agent. State the outcome,
+   constraints, and whether you want advice or changes made.
 3. Keep follow-ups in the same thread. Agents post results, blockers, and links
    there. Open the linked file or pull request to inspect the work; a proposed
    change is not necessarily deployed or merged. Ask for status in that thread
@@ -22,10 +22,10 @@ not an installation guide.
 
 Fictional request:
 
-> @Honey draft a one-page quick reference for an imaginary tool called Example.
-> Use plain English and save it for review. Do not publish or deploy it.
+> @Cinco arrange a one-page quick reference for an imaginary tool called
+> Example. Use plain English and save it for review. Do not publish or deploy it.
 
-| Agent | Ask for |
+| Agent | Responsibility |
 | --- | --- |
 | Honey | General help and hands-on work |
 | Cinco | Coordination and follow-through across agents |
@@ -45,10 +45,14 @@ when shell access is needed. [Maintenance](docs/maintenance-recovery.md) explain
 Gardiner’s limits and recovery checks. Normal Buzz use does not require a shell
 or restarting services.
 
+Read **[How it works](docs/how-it-works.md)** for the request lifecycle,
+permission layers, hosting choices, and recovery after a restart.
+
 ## Reference guides
 
 | Guide | Covers |
 | --- | --- |
+| [How it works](docs/how-it-works.md) | Coordination, permissions, hosting, and restart recovery |
 | [Inventory](docs/machine-inventory.md) | Installed versions, services, and source locations |
 | [Buzz](docs/buzz-agents.md) | Agents, sessions, messages, and dependencies |
 | [Maintenance](docs/maintenance-recovery.md) | Helper authority and recovery |
