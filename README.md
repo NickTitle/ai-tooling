@@ -1,50 +1,27 @@
-# ai-tooling
+# AI tooling
 
-Markdown notes for the AI-assisted tooling and local hosting conventions on
-`claudebox`.
+Tooling and operating notes for this host. Reviewed 2026-09-07.
 
-Last updated: 2026-05-30
-
-## Start Here
-
-| Document | Purpose |
+| Guide | Covers |
 | --- | --- |
-| [Box Utilities](docs/box-utilities.md) | Imported gist with the machine map, WebShell, Tailscale, apphost registry, Temporal, and debugging commands. |
-| [Serve Skill](docs/serve-skill.md) | Operational notes for the Codex `serve` skill and the systemd/apphost/Temporal policy. |
-| [Apphost Registry](docs/apphost-registry.md) | Registry runtime model, API use, static app registration, and external service rows. |
-| [WebShell And Tailscale](docs/webshell-tailscale.md) | Browser terminal architecture, Tailscale access, bind-address conventions, and checks. |
-| [Codex Local Workflow](docs/codex-local-workflow.md) | How Codex should work on this box: edits, verification, services, and safety rules. |
-| [GitHub Workflow](docs/github-workflow.md) | `gh`, gists, repo publishing, and the import source for this repo. |
+| [Inventory](docs/machine-inventory.md) | Installed versions, services, and source locations |
+| [Buzz](docs/buzz-agents.md) | Agents, sessions, messages, and dependencies |
+| [Maintenance](docs/maintenance-recovery.md) | Helper authority and recovery |
+| [Codex](docs/codex-local-workflow.md) | Configuration, skills, and editing workflow |
+| [Hosting](docs/serve-skill.md) | systemd and Temporal |
+| [Registry](docs/apphost-registry.md) | Static hosting and external service rows |
+| [WebShell](docs/webshell-tailscale.md) | Terminal persistence and Tailscale access |
+| [GitHub](docs/github-workflow.md) | Review and publication |
+| [Commands](docs/box-utilities.md) | Common read-only checks |
 
-## Source Gist
+This public repo documents tooling only. Exclude credentials, private identities,
+application inventories, actual-project names or data, and raw transcripts.
+Examples use neutral names. Local paths identify tooling sources on this host.
 
-This repo started from the secret gist:
+The [portable Buzz toolkit](https://github.com/NickTitle/ai-tooling/pull/1) is
+separate export work with stricter placeholder and provenance rules. It is not
+a backup of deployed configuration.
 
-```text
-https://gist.github.com/OWNER/GIST_ID
-```
-
-The imported copy lives at [docs/box-utilities.md](docs/box-utilities.md).
-
-## Core Rules
-
-- Do not commit credentials, auth tokens, private keys, or personal data.
-- Treat machine-specific topology as public once it lands in this repo.
-- Use systemd for anything that should remain running after the agent turn.
-- Use the apphost registry as the inventory/front door for discoverable local web apps.
-- Use Tailscale addresses for private access from your own devices.
-- Use local Temporal for delayed, scheduled, retried, or workflow-like app behavior.
-- Prefer `/home/nick/Development` for project checkouts and local tools.
-
-## Maintenance
-
-```bash
-git status
-git pull --ff-only
-git add README.md docs
-git commit -m "Update ai tooling notes"
-git push
-```
-
-Keep sensitive operational details in a private location unless they are safe to
-publish.
+Use systemd for persistent services, apphost for discoverable apps, and Temporal
+for durable scheduled work. Record observation dates; installed versions do not
+prove release currency. Change docs through the [reviewed publication workflow](docs/github-workflow.md).
