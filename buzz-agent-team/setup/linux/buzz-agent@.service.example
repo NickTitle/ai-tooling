@@ -1,0 +1,22 @@
+[Unit]
+Description=Buzz persistent Codex agent (%i)
+Requires={{RELAY_UNIT}}
+After={{RELAY_UNIT}} network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User={{OS_USER}}
+Group={{OS_GROUP}}
+WorkingDirectory={{WORKSPACE_ROOT}}
+EnvironmentFile={{AGENT_ENV_FILE}}
+Environment=PATH={{BUZZ_BIN_DIR}}:{{BUZZ_ACP_BIN_DIR}}:/usr/local/bin:/usr/bin:/bin
+Environment=SSL_CERT_FILE={{TLS_CA_FILE}}
+ExecStart={{BUZZ_ACP_BIN}}
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=30
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target

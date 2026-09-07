@@ -1,0 +1,23 @@
+#!/bin/sh
+set -eu
+
+: "${BUZZ_AGENT_ENV_FILE:?set BUZZ_AGENT_ENV_FILE in the LaunchAgent}"
+: "${BUZZ_AGENT_SECRET_FILE:?set BUZZ_AGENT_SECRET_FILE in the LaunchAgent}"
+
+if [ ! -f "$BUZZ_AGENT_ENV_FILE" ] || [ ! -f "$BUZZ_AGENT_SECRET_FILE" ]; then
+  printf '%s\n' 'Buzz agent configuration or secret file is missing' >&2
+  exit 1
+fi
+
+secret_mode=$(stat -f '%Lp' "$BUZZ_AGENT_SECRET_FILE")
+if [ "$secret_mode" != '600' ]; then
+  printf '%s\n' 'Buzz agent secret file must have mode 0600' >&2
+  exit 1
+fi
+
+set -a
+. "$BUZZ_AGENT_ENV_FILE"
+. "$BUZZ_AGENT_SECRET_FILE"
+set +a
+
+exec "{{BUZZ_ACP_BIN}}"
